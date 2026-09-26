@@ -17,25 +17,25 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
-//    try
-//    {
-//        var context = services.GetRequiredService<ToDoAppDbContext>();
-//        if (context.Database.GetPendingMigrations().Any())
-//        {
-//            context.Database.Migrate();
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        // Aqui puedes manejar cualquier error que pueda surgir, por ejemplo, utilizando un logger
-//        var logger = services.GetRequiredService<ILogger<Program>>();
-//        logger.LogError(ex, "Un error ocurrió al aplicar las migraciones.");
-//    }
-//}
+    try
+    {
+        var context = services.GetRequiredService<ToDoAppDbContext>();
+        if (context.Database.GetPendingMigrations().Any())
+        {
+            context.Database.Migrate();
+        }
+    }
+    catch (Exception ex)
+    {
+        // Aqui puedes manejar cualquier error que pueda surgir, por ejemplo, utilizando un logger
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Un error ocurrió al aplicar las migraciones.");
+    }
+}
 
 // ── Middleware Pipeline ──
 if (app.Environment.IsDevelopment())
